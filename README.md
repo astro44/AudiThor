@@ -1,7 +1,7 @@
 AudiThor Service Auditor!
 =========================
 
-![Audithor hammer](https://github.com/astro44/AudiThor/blob/master2/img/hammer.png?raw=true)
+![Audithor hammer](https://github.com/astro44/AudiThor/blob/master/img/hammer2.png?raw=true)
 ### QuikStart:
 
  1. Run requirements.txt to install requirements via pip (inside a venv to keep it small).
