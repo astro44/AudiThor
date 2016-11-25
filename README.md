@@ -36,11 +36,11 @@ Configuration is stored in a yaml file CONFIG.yaml and contains general config u
 
 > **globalAccounts:**
 
-> - **Account#** references the unique AWS ID for said account.
->> -  **all**  short name used to reference said account.
->> - **title** Display name used to reference said account.
->> - **eID** external ID used in IAM role to allow trusted access from alternate account.
->> - **role** role created for this account that incoming role/user can assume using above eID.
+> **Account#** references the unique AWS ID for said account.
+> -  **all**  short name used to reference said account.
+> - **title** Display name used to reference said account.
+> - **eID** external ID used in IAM role to allow trusted access from alternate account.
+> - **role** role created for this account that incoming role/user can assume using above eID.
 
 
 
