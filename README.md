@@ -10,10 +10,10 @@ AudiThor Service Auditor!
  4. Ensure that the Lambda role has permission to write to given bucket. 
 
 
-![aws](https://github.com/astro44/AudiThor/blob/master/img/aws-cloud.png?raw=true) ![Lambda](https://github.com/astro44/AudiThor/blob/master/img/lambda.jpg?raw=true)
+[![aws](https://github.com/astro44/AudiThor/blob/master/img/aws-cloud.png?raw=true)](https://aws.amazon.com) [![Lambda](https://github.com/astro44/AudiThor/blob/master/img/lambda.jpg?raw=true)](https://aws.amazon.com/lambda/?sc_channel=PS&sc_campaign=acquisition_US&sc_publisher=google&sc_medium=lambda_b&sc_content=lambda_e&sc_detail=amazon%20lambda&sc_category=lambda&sc_segment=145499617359&sc_matchtype=e&sc_country=US&s_kwcid=AL!4422!3!145499617359!e!!g!!amazon%20lambda&ef_id=V4Z@0wAAAfeTUnJI:20161125191208:s)
 
 #### SUMMARY:
-Audithor was intended to be used as an auditor for your multiple AWS accounts. It currently supports EC2, RDS, Lambda, Dynamodb, S3, ELB, and more.  The outputs are in CSV and JSON  format.  There also is an out specifically tailored for [SumoLogic](https://sumologic.com) ![SumoLogic](https://github.com/astro44/AudiThor/blob/master/img/sumo.png?raw=true), In this case you can achieve nice dashboards with little effort.
+Audithor was intended to be used as an auditor for your multiple AWS accounts. It currently supports EC2, RDS, Lambda, Dynamodb, S3, ELB, and more.  The outputs are in CSV and JSON  format.  There also is an out specifically tailored for [![SumoLogic](https://github.com/astro44/AudiThor/blob/master/img/sumo.png?raw=true) SumoLogic](https://sumologic.com), In this case you can achieve nice dashboards with little effort.
 
 ----------
 
