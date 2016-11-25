@@ -1,0 +1,32 @@
+
+auditConfig:
+  main_bucket: SumoLogic-mtc-governance-audit
+  method: mylambdaMethodAuditName
+  key: audit-gov-%s.json
+  key_complete: audit-gov-%s-complete.json
+  key_master: audit-gov-%s-master.json
+  key_folder: process
+  thread_event: Event
+  threaded: True
+  region: 'us-east-1'
+  vendor: SumoLogic
+  sumo_file: sumo-audit-silver.json
+  sumo_endpoint: https://endpoint1.collection.us2.sumologic.com/receiver/v1/http/ZaVns_someENDPOINT_2GdjJmEXYfNiOpgFc7HjTKSvvYlP-Cawa8aKL9h_vWxPX0x3jfsOd33KbYwwlZcdeti_zFHkgsNxM-Uiz-AaP9NkTwzIEw==
+
+#    global_accounts44RED = {
+#    '061851502621': {'all': 'Red', 'title': 'Red-testing',
+#                     'eID': 'wwWCGh8TPx78YrrG22sFaTA4Khj2gUsZcfFuWlogpSOtmyrIfSPU5xspEcwgX9b4FOc252FYJi3xJnuhPSlLUFD0sVBbz4hrn8pfg7IcBJmW37ApPKCHY93tDU',
+#                     'role': 'Baston_Deployer'},
+#    }
+
+globalAccounts:
+  766886221789:
+    all: sumox
+    title: SUMOX-MARKETING
+    eID: tMU9ey8A3zH1fljOOKFjK3lT8giP6xxJX22aEbZc0Af/gV4YYdUSP91+vxgsp1SRReQoQUT4psKRK1SaH0PNQofBBEvC3DyTFisgq+dnEfswMpHVksr9tbAtnjr8oSt
+    role: Baston_Deployer
+  616122233857:
+    all: data
+    title: SUMO-BIG-DATA
+    eID: TneyZVG1F5NDFxSVzeewFmdYEYsiX5u+22Rp/b5pJH/SiebM9sAMJL4Xj8g1x+2qUGyb3vNeIiBluexxCNjJqgA0VdQRWK5m7HXDFOFjqGlSvThhcYeYsXXNNysGZv
+    role: Baston_Deployer
