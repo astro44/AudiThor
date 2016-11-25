@@ -1,7 +1,7 @@
 AudiThor Service Auditor!
 =========================
 
-![Audithor hammer](https://github.com/astro44/AudiThor/blob/master/img/hammer2.png?raw=true)
+![Audithor hammer](https://github.com/astro44/AudiThor/blob/master/img/hammer2.png?raw=true)AWS | AudiThor
 ### QuikStart:
 
  1. Run requirements.txt to install requirements via pip (inside a venv to keep it small).
@@ -10,7 +10,7 @@ AudiThor Service Auditor!
  4. Ensure that the Lambda role has permission to write to given bucket. 
 
 #### SUMMARY:
-Audithor was intended to be used as an auditor for your AWS accounts. It currently supports EC2, RDS, Lambda, Dynamodb, S3, ELB, and more.  The outputs are in CSV and JSON  format.  There also is an out specifically tailored for [SumoLogic](https://sumologic.com), In this case you can achieve nice dashboards with little effort.
+Audithor was intended to be used as an auditor for your multiple AWS accounts. It currently supports EC2, RDS, Lambda, Dynamodb, S3, ELB, and more.  The outputs are in CSV and JSON  format.  There also is an out specifically tailored for [SumoLogic](https://sumologic.com), In this case you can achieve nice dashboards with little effort.
 
 ----------
 
