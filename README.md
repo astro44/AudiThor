@@ -20,27 +20,27 @@ Audithor was intended to be used as an auditor for your multiple AWS accounts. I
 
 Configuration is stored in a yaml file CONFIG.yaml and contains general config under  the following keys:
 
-> **auditConfig:**
+> **auditConfig -**
 
-> - **main_bucket** used to aggregate data about target accounts.
-> -  **method**  name of the method created to use this application within your lambda service.
-> - **key** you can leave this. (*its used to dynamically flag '%s' initialized process on account id)
-> - **key_complete** you can leave this. (*its used to dynamically store result data based on account id)
-> - **key_master** you can leave this. (*Stores all accounts for later reference)
-> - **key_folder** you can leave this. (*Directory where all above files are stored during processing)
-> - **thread_event** you can leave this. (*Lambda's have 5min limits keeping this to type "Event" helps mitigate the possible timeout)
-> - **threaded** you can leave this. (*Lambda functions currently do not allow multi-processing which is why this is set to True)
-> - **region** set to the target region.
-> - **vendor** name of your organization
-> - **sumo_file** you can leave this. (*name of the file generated before sending to [SumoLogic](https://service.sumologic.com/ui/))
+> - **main_bucket**: used to aggregate data about target accounts.
+> -  **method**:  name of the method created to use this application within your lambda service.
+> - **key**: you can leave this. (*its used to dynamically flag '%s' initialized process on account id)
+> - **key_complete**: you can leave this. (*its used to dynamically store result data based on account id)
+> - **key_master**: you can leave this. (*Stores all accounts for later reference)
+> - **key_folder**: you can leave this. (*Directory where all above files are stored during processing)
+> - **thread_event**: you can leave this. (*Lambda's have 5min limits keeping this to type "Event" helps mitigate the possible timeout)
+> - **threaded**: you can leave this. (*Lambda functions currently do not allow multi-processing which is why this is set to True)
+> - **region**: set to the target region.
+> - **vendor**: name of your organization
+> - **sumo_file**: you can leave this. (*name of the file generated before sending to [SumoLogic](https://service.sumologic.com/ui/))
 
-> **globalAccounts:**
+> **globalAccounts -**
 
-> **Account#** references the unique AWS ID for said account.
-> -  **all**  short name used to reference said account.
-> - **title** Display name used to reference said account.
-> - **eID** external ID used in IAM role to allow trusted access from alternate account.
-> - **role** role created for this account that incoming role/user can assume using above eID.
+> **Account#**: references the unique AWS ID for said account.
+> -  **all**:  short name used to reference said account.
+> - **title**: Display name used to reference said account.
+> - **eID**: external ID used in IAM role to allow trusted access from alternate account.
+> - **role**: role created for this account that incoming role/user can assume using above eID.
 
 
 
