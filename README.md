@@ -1,16 +1,16 @@
 AudiThor Service Auditor!
 =========================
 
-![Audithor hammer](AudiThor/img/hammer.png)
-QuikStart:
+![Audithor hammer](https://github.com/astro44/AudiThor/blob/master2/img/hammer.png?raw=true)
+### QuikStart:
 
  1. Run requirements.txt to install requirements via pip (inside a venv to keep it small).
- 2. Modify CONFIG.yaml to suite your needs.
+ 2. Modify **CONFIG.yaml** to suite your needs.
  3. zip requirements and code and upload into your lambda.
  4. Ensure that the Lambda role has permission to write to given bucket. 
 
-SUMMARY:
-Audithor was intended to be used as an auditor for your AWS accounts. It currently supports EC2, RDS, Lambda, Dynamodb, S3, ELB, and more.  The outputs are in CSV and JSON  format.  There also is an out specifically tailored for SumoLogic, In this case you can achieve nice dashboards with little effort.
+#### SUMMARY:
+Audithor was intended to be used as an auditor for your AWS accounts. It currently supports EC2, RDS, Lambda, Dynamodb, S3, ELB, and more.  The outputs are in CSV and JSON  format.  There also is an out specifically tailored for [SumoLogic](https://sumologic.com), In this case you can achieve nice dashboards with little effort.
 
 ----------
 
@@ -32,8 +32,7 @@ Configuration is stored in a yaml file CONFIG.yaml and contains general config u
 > - **threaded** you can leave this. (*Lambda functions currently do not allow multi-processing which is why this is set to True)
 > - **region** set to the target region.
 > - **vendor** name of your organization
-> - **sumo_file** you can leave this. (*name of the file generated before sending to sumoLogic)
-
+> - **sumo_file** you can leave this. (*name of the file generated before sending to [SumoLogic](https://service.sumologic.com/ui/))
 
 > **globalAccounts:**
 
@@ -42,6 +41,7 @@ Configuration is stored in a yaml file CONFIG.yaml and contains general config u
 >> - **title** Display name used to reference said account.
 >> - **eID** external ID used in IAM role to allow trusted access from alternate account.
 >> - **role** role created for this account that incoming role/user can assume using above eID.
+
 
 
 
