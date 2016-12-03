@@ -68,12 +68,12 @@ class Database:
 
         pools = 2  # 171.35 seconds  #168 seconds
         totalItems = len(itemlist)
+        q = None
         if threaded:
             pools= auditMeth.poolThreadNumber(totalItems, mp.cpu_count())
-            if pools>0:
-                p = mp.Pool(pools)
-            elif pools==0:  # means there is only one so don't apply overhead of pools
-                threaded = False
+
+            p = mp.Pool(1 if pools == 0 else pools)
+
         else:
             p = mp.Pool()
             m = mp.Manager()

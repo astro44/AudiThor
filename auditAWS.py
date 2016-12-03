@@ -38,6 +38,7 @@ class AudiThor():
     ##### MAIN audit method FOR ALL RESOURCES   #######
     ###################################################
     def awsResources(self,region, useAccounts=False, acct=None, multiThread=False):
+        global accountID
 
        # regular expressions needed for each service type
 
@@ -82,6 +83,8 @@ class AudiThor():
             for aID, e in envs.items():
                 titleIN ="%s : [%s]"%(e['title'],aID)
                 aconnect = awsConnect( aID, e['eID'],e['role'], sts_client, region, True, multiThread )
+                if str(accountID) ==str(aID):
+                    aconnect._eID = None
                 aconnect.connect()
                 objs.append([titleIN])
                 pyObj[titleIN]={}
@@ -156,7 +159,7 @@ class AudiThor():
 
 
 def executeLambda( ploadin,que=None):
-    global Main_bucket, threadEvent, Main_method, mRegion
+    global Main_bucket, threadEvent, Main_method, mRegion, accountID
     if threadEvent is None:
         event = 'RequestResponse'
     else:
@@ -173,7 +176,7 @@ def executeLambda( ploadin,que=None):
             #Payload        = pload
         )
     if (event=='Event'):
-        return None
+        return ploadin.keys()[0]
     minionData =json.loads(response['Payload'].read())
     if minionData.has_key("stackTrace"):
         return (['ERROR OCCURED',ploadin.keys()[0]],
@@ -190,14 +193,16 @@ threadEvent=None
 mRegion = None
 configPath='auditCONFIG.yaml'
 inLambda=True
+accountID=None
 
 #requires roles setup for full s3 bucket permission
 #requires s3 bucket to exist
 #requires lambda execution permission
 
 def lambda_handler(event,context):
-    global mRegion, Main_bucket,Main_method, threadEvent
+    global mRegion, Main_bucket,Main_method, threadEvent, accountID
     current, envs = auditMeth.loadConfig(configPath, None)
+    accountID= context.invoked_function_arn.split(":")[4]
     print envs
     mRegion = current.mRegion
     vendor =current.vendor
