@@ -11,7 +11,7 @@ auditConfig:
   region: 'us-east-1'
   vendor: SumoLogic
   sumo_file: sumo-audit-silver.json
-  sumo_endpoint: https://endpoint1.collection.us2.sumologic.com/receiver/v1/http/ZaVns_someENDPOINT_2GdjJmEXYfNiOpgFc7HjTKSvvYlP-Cawa8aKL9h_vWxPX0x3jfsOd33KbYwwlZcdeti_zFHkgsNxM-Uiz-AaP9NkTwzIEw==
+  sumo_endpoint: https://endpoint1.collection.us2.sumologic.com/receiver/v1/http/ZaVns_someENDPOINT_2GdjJmEXYfNiOpgFc7HjTKSvvYlP-Cawa8aKL9h_vWxPX0x3jfsOd33KbYwwl11Zcdeti_zFHkgsNxM-Uiz-AaP9NkTwzIEw==
 
 #    global_accounts44RED = {
 #    '061851502621': {'all': 'Red', 'title': 'Red-testing',
@@ -20,13 +20,13 @@ auditConfig:
 #    }
 
 globalAccounts:
-  766886221789:
+  766886221709:
     all: sumox
     title: SUMOX-MARKETING
-    eID: tMU9ey8A3zH1fljOOKFjK3lT8giP6xxJX22aEbZc0Af/gV4YYdUSP91+vxgsp1SRReQoQUT4psKRK1SaH0PNQofBBEvC3DyTFisgq+dnEfswMpHVksr9tbAtnjr8oSt
+    eID: tMU9ey8A3zH1fljOOKFjK3lT8giP6xx11JX22aEbZc0Af/gV4YYdUSP91+vxgsp1SRReQoQUT4psKRK1SaH0PNQofBBEvC3DyTFisgq+dnEfswMpHVksr9tbAtnjr8oSt
     role: Baston_Deployer
-  616122233857:
+  616122233027:
     all: data
     title: SUMO-BIG-DATA
-    eID: TneyZVG1F5NDFxSVzeewFmdYEYsiX5u+22Rp/b5pJH/SiebM9sAMJL4Xj8g1x+2qUGyb3vNeIiBluexxCNjJqgA0VdQRWK5m7HXDFOFjqGlSvThhcYeYsXXNNysGZv
+    eID: TneyZVG1F5NDFxSVzeew11FmdYEYsiX5u+22Rp/b5pJH/SiebM9sAMJL4Xj8g1x+2qUGyb3vNeIiBluexxCNjJqgA0VdQRWK5m7HXDFOFjqGlSvThhcYeYsXXNNysGZv
     role: Baston_Deployer

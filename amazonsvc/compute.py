@@ -79,7 +79,7 @@ class Compute:
         for unit in itemlist:
             name = unit['LoadBalancerName']
             account = unit['SourceSecurityGroup']['OwnerAlias']
-            if nEnv in name or aconnect._useAccounts:
+            if str(nEnv) in name or aconnect._useAccounts:
                 lfound.append(name)
                 if not added:
                     added=True
@@ -177,7 +177,7 @@ class Compute:
             for unit in itemlist:
                 name = unit['Name']
                 account = unit['OwnerId']
-                if nEnv in name or aconnect._useAccounts:
+                if str(nEnv) in name or aconnect._useAccounts:
                     #p = Process(target=self.ec2Define,args=(current,aconnect,unit,name))
                     if pools==0:
                         newobjs, row = ec2Define( unit, name)
@@ -243,7 +243,7 @@ class Compute:
         for unit in itemlist:
             name = unit['FunctionName']
             account = unit['FunctionArn']
-            if nEnv in name or aconnect._useAccounts:
+            if str(nEnv) in name or aconnect._useAccounts:
                 lfound.append(name)
                 if not added:
                     added=True

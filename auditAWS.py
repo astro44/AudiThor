@@ -164,8 +164,10 @@ def executeLambda( ploadin,que=None):
         event = 'RequestResponse'
     else:
         event = threadEvent
-    print ('     ***  NNEEWW **** MASTER EXECUTE LAMDA  ***  ***  ', event)
     pload = {'defined':ploadin}
+    print ('     ***  NNEEWW **** MASTER EXECUTE LAMDA  ***  ***  %s with:%s' % (event, pload))
+    if Threaded_S3:
+        pload.update(Threaded_S3)
     session = boto3.session.Session()
     client = session.client('lambda', mRegion)
 
@@ -194,14 +196,24 @@ mRegion = None
 configPath='auditCONFIG.yaml'
 inLambda=True
 accountID=None
+Threaded_S3=None
 
 #requires roles setup for full s3 bucket permission
 #requires s3 bucket to exist
 #requires lambda execution permission
+###awsKHE_tags.lambda_handler
+# pass in event ={"s3":{"bucket":"kaplan-khe-dcs-tagging", "config":"dcs-config/auditCONFIG.yaml"}}
+# pass to cleanup event={'reset':'true'}
 
 def lambda_handler(event,context):
     global mRegion, Main_bucket,Main_method, threadEvent, accountID
-    current, envs = auditMeth.loadConfig(configPath, None)
+    if event.has_key('s3'):
+        # bucket = {'s3bucket':dsadfs, 'key':'fdassd'}
+        current, envs = auditMeth.loadConfig(configPath, event['s3'] )
+        Threaded_S3={'s3':event['s3']}
+    else:
+        current, envs = auditMeth.loadConfig(configPath, None)
+        print('  ** loading from LOCAL FILE::%s'%configPath)
     accountID= context.invoked_function_arn.split(":")[4]
     print envs
     mRegion = current.mRegion
@@ -211,6 +223,8 @@ def lambda_handler(event,context):
     threadEvent = current.threadEvent
     if not auditMeth.bucketExists(Main_bucket):
         return '[E] bucket needed to proceed %s'%(Main_bucket)
+    else:
+        print 'load config from s3 if found'
     s3Enabled = True
     payLoad = None
     vname = vendor.lower()
@@ -218,6 +232,10 @@ def lambda_handler(event,context):
     keyMaster = current.s3_keyMaster%(vname)
     keyFolder=current.s3_keyFolder
     print '......START NEW LAMBDA.......'
+    if event.has_key('reset'):
+        if event['reset'] == 'true':
+            lambda_s3Delete(Main_bucket,keyFolder)
+            return 'reset complete'
     lists = AudiThor()
     useAccountID=True
     upload2S3=True
@@ -231,16 +249,35 @@ def lambda_handler(event,context):
             print ' got results'
             listReady = lambda_s3Match( Main_bucket, '%s/%s'%(keyFolder,keyMaster),current.s3_keyComplete )
             if listReady:
-                mlist,objs, pyObj = listReady
-                #print pyObj
-                auditMeth.lambda_writeResult(upload2S3, pyObj, Main_bucket,current.sumoName, current.SUMOPOINT)
-                auditMeth.s3Cleanup(keyMaster,Main_bucket,mlist,keyFolder, current.s3_keyComplete, current.s3_key)
-                #print("--- %s seconds A---" % (time.time() - start_time))
+                masterConverge(listReady,current,upload2S3,keyFolder,keyMaster)
                 return 'Completed Process... cleanup in progress....'
             else: #NOT READY KILL process. NEXT EVENT will CHECK
                 return listReady
-    if len(envs) <2:
-        print '  ONLY ONE ACCOUNT FOUND --->'
+    else:  ## MAKE SURE EVENTS ARE SETUP ON MASTER
+        sc3=boto3.client('s3')
+        triggers =sc3.get_bucket_notification_configuration(Bucket=Main_bucket)
+        print triggers
+        foundMeth=foundevent=False
+        if triggers.has_key('LambdaFunctionConfigurations'):
+            configured=False
+            for t in triggers['LambdaFunctionConfigurations']:
+                if Main_method in t['LambdaFunctionArn']:
+                    foundMeth=True
+                if 's3:ObjectCreated:*' in t['Events']:
+                    foundevent=True
+                rules = t['Filter']['Key']['FilterRules']
+                for rule in rules:
+                    print 'Name: %s, Value: %s'%( rule['Name'], rule['Value'])
+                if foundevent and foundMeth:
+                    configured=True
+                    break
+            if not configured:
+                print ('   S3 NEEDS FIXX  !!!!!')
+                print ('S3 bucket <%s> has no trigger prefix %s to execute lambda <%s> please verify to use "complete.json"'%(Main_bucket,keyFolder, Main_method ) )
+            else:
+                print ' Master and S3 ready....'
+    if len(envs) <2 and not payLoad:  # IS NOT A CHILD if payload present
+        print ('  ONLY ONE ACCOUNT FOUND --->%s'%len(envs))
         objs, pyObj = lists.awsResources(region, useAccountID, envs, threaded  )
         auditMeth.lambda_writeResult(upload2S3, pyObj, Main_bucket,current.sumoName)
         print("--- %s seconds A---" % (time.time() - start_time))
@@ -297,6 +334,16 @@ def lambda_handler(event,context):
                 return lambda_multiChild(start_time,lists, payLoad,isThreaded,useAccountID )
     return None
 
+def masterConverge(listReady,current,upload2S3,keyFolder,keyMaster):
+    mlist,objs, pyObj = listReady
+    auditMeth.lambda_writeResult(upload2S3, pyObj, Main_bucket, current.sumoName, current.SUMOPOINT)
+    auditMeth.s3Cleanup(keyMaster, Main_bucket, mlist, keyFolder, current.s3_keyComplete, current.s3_key)
+
+def lambda_s3Delete(bucket,KeyMaster):
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(bucket)
+    for obj in bucket.objects.filter(Prefix='%s/'%KeyMaster):
+        s3.Object(bucket.name, obj.key).delete()
 
 def lambda_s3Match(bucket,keyMaster, keyComplete):
     s3 = boto3.resource('s3')
