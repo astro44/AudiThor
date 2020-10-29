@@ -3,7 +3,7 @@ botocore=>1.4.36
 colorama=>0.3.7
 docutils=>0.12
 pyparsing=>2.0.1
-PyYAML==3.12
+PyYAML
 python-dateutil=>2.5.3
 simplejson=>3.8.2
 six=>1.10.0
